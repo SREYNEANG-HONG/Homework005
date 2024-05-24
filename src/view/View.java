@@ -3,9 +3,6 @@ package view;
 import exception.CourseNotFoundException;
 import service.CourseService;
 import service.CourseServiceImp;
-
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class View {
@@ -16,8 +13,6 @@ public class View {
         System.out.println();
     }
 
-
-    CourseServiceImp courseServiceImp = new CourseServiceImp();
     static CourseService courseService = new CourseServiceImp();
 
     public static void menu_op(){
@@ -65,6 +60,7 @@ public class View {
                     System.out.print("[+] Remove Course By ID: ");
                     Integer id = new Scanner(System.in).nextInt();
                     courseService.removeCourseById(id);
+                    break;
                 }
                 case 0: {
                     System.out.println("Exiting... <3");
