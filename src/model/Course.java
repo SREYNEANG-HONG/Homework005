@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
+import java.util.Random;
 
 @Data
 @AllArgsConstructor
@@ -17,5 +18,8 @@ public class Course {
     private String startDate;
 
 
+    public static Integer generateId(){
+        return ((new Random().nextInt(9000) + 1001));
+    }
 }
 

@@ -1,5 +1,6 @@
 package view;
 
+import exception.CourseNotFoundException;
 import service.CourseService;
 import service.CourseServiceImp;
 
@@ -28,7 +29,7 @@ public class View {
         System.out.println("0. Exit");
 
     }
-    public static void menu() {
+    public static void menu() throws CourseNotFoundException {
         Scanner input = new Scanner(System.in);
         int op;
         do {
@@ -41,32 +42,7 @@ public class View {
             input.nextLine();
             switch (op) {
                 case 1: {
-                    System.out.print("[+] Insert course title: ");
-                    String courseTitle = input.nextLine();
-
-//                    System.out.print("[+] Insert Instructor Name: ");
-//                    String instructorName[] = new String[]{new Scanner(System.in).nextLine().trim()};
-
-                    System.out.println("[!] You can insert multi instructor name by splitting [,] ".toUpperCase(Locale.ROOT));
-                    System.out.print("[+] Insert Instructor Name : ");
-                    String inName = new Scanner(System.in).nextLine();
-                    String [] instructorName = inName.split(",");
-                    for(int i=0;i<instructorName.length;i++){
-                        instructorName[i] = instructorName[i].trim();
-                    }
-
-//                    System.out.print("[+] Insert Course Requirement: ");
-//                    String courseRequirement[] = new String[]{new Scanner(System.in).nextLine().trim()};
-
-                    System.out.println("[!] You can insert multi Course Requirement by splitting [,] ".toUpperCase(Locale.ROOT));
-                    System.out.print("[+] Insert Course Requirement : ");
-                    String courseRequire = new Scanner(System.in).nextLine();
-                    String [] courseRequirement = courseRequire.split(",");
-                    for(int i=0;i<courseRequirement.length;i++){
-                        courseRequirement[i] = courseRequirement[i].trim();
-                    }
-
-                    courseService.addNewCourse(courseTitle, instructorName,courseRequirement);
+                    courseService.addNewCourse();
                     break;
                 }
                 case 2: {
@@ -74,14 +50,12 @@ public class View {
                     break;
                 }
                 case 3: {
-//                    System.out.print("[+] Insert course ID: ");
                     System.out.print("[+] Find course by ID: ");
                     Integer courseId = input.nextInt();
                     courseService.findCourseById(courseId);
                     break;
                 }
                 case 4: {
-//                    System.out.print("[+] Find Course By Title: ");
                     System.out.print("[+] Find course by Name: ");
                     String courseName = input.nextLine();
                     courseService.findCourseByName(courseName);
@@ -89,6 +63,8 @@ public class View {
                 }
                 case 5: {
                     System.out.print("[+] Remove Course By ID: ");
+                    Integer id = new Scanner(System.in).nextInt();
+                    courseService.removeCourseById(id);
                 }
                 case 0: {
                     System.out.println("Exiting... <3");
